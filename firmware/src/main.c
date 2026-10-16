@@ -374,6 +374,22 @@ UI_SMALL static void fm1_main(void)
                         k10 = (ed_master - 1u) * 1023u / 126u;
                 }
 #if BOARD_SMK37
+                {   /* the volume knob is endless here, with no position to see: a turn shows MASTER and its level in
+                     * the top bar */
+                    static int32_t shown = -1;
+                    if (shown >= 0 && a != shown && !smk_master_hold) {
+                        uint32_t p = (uint32_t)a * 100u / 1023u;
+                        char d[5] = {0}, *q = d;
+                        if (p >= 100u)
+                            *q++ = '1';
+                        if (p >= 10u)
+                            *q++ = (char)('0' + p / 10u % 10u);
+                        *q++ = (char)('0' + p % 10u);
+                        *q = '%';
+                        ui_say("MASTER ", d);
+                    }
+                    shown = a;
+                }
                 song.master_q12 = smk_master_q12(k10, lim_classic);   /* (HOME menu > AUDIO > LIMITER: its knob law, fx.c) */
 #else
                 song.master_q12 = (k10 * k10) >> 8;            /* 0 .. ~4096 */

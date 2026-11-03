@@ -289,6 +289,9 @@ int main(int argc, char **argv)
     }
     ui.menu_sel = MS_FIRST[MS_DAW]; shot("daw-menu-daw");
     ui.menu_sel = MS_FIRST[MS_PLAY]; shot("daw-menu-play");
+    ui.menu_sel = MS_FIRST[MS_AUDIO]; shot("smk-menu-audio");   /* (2.8.4) LOWCUT, FILTER RESO, LIMITER */
+    ui.menu_sel = MS_FIRST[MS_USB]; shot("smk-menu-usb");
+    ui.menu_sel = MS_FIRST[MS_SEQ]; shot("smk-menu-seq");
     knob_layout = 1;
     ui.menu_sel = MS_FIRST[MS_MIDI]; shot("daw-menu-midi-smk");
     check(knob_digit(EN_K1) == '1', "KNOB LAYOUT SMK: the rows are K1..K4");

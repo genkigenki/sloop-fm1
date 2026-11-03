@@ -116,7 +116,8 @@ UI_SMALL static int ed_smp_erase(uint32_t k, uint32_t all)  /* header sector, or
     int rc = 0;
 #if BOARD_SMK37
     if (!SMP_USER_HAS(k))
-        return -8;                                 /* SMK: USR3 / USR4 have no flash */
+        return all ? 0 : -8;                       /* SMK: USR3 / USR4 have no flash: always empty, so ERASE is done
+                                                    * (a restore of an FM-1 backup goes on); BEGIN is refused */
 #endif
     usr_nz[k] = 0;
     for (i = 0; i < 16u; i++)
@@ -860,9 +861,17 @@ UI_SMALL static void ed_handle(const uint8_t *f, uint32_t n)   /* f: the bytes b
         ed_b((uint32_t)ed_smp_end(a[0], a + 1, na - 1u));
         break;
     case ED_SMP_INFO:                                      /* -> per slot: zones (0 = empty), name, data KiB */
+#if BOARD_SMK37
+        /* SMK-37: only the slots with flash (USR1, USR2): the editor then offers no USR3 / USR4 (Samples, CHOP) and
+         * no USR4 / USR3+4 on its DRUM KIT page (it took 4 slots and every upload there failed) */
+        ed_b(SMP_USER_FLASH_SLOTS);
+        ed_b(SMP_USER_SIZE / 1024u);
+        for (i = 0; i < SMP_USER_FLASH_SLOTS; i++) {
+#else
         ed_b(SMP_USER_SLOTS);
         ed_b(SMP_USER_SIZE / 1024u);
         for (i = 0; i < SMP_USER_SLOTS; i++) {
+#endif
             const smp_user_hdr_t *h = (const smp_user_hdr_t *)smp_user_xip(i);
             char nm[9] = {0};
             uint32_t j;

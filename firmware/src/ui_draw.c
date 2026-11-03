@@ -25,7 +25,11 @@ UI_SMALL static void fit(char *d, const char *src, const felucca_font_t *f, int3
 
 UI_SMALL static int32_t batt_level(void)                         /* ADC ch3 thresholds */
 {
+#if BOARD_SMK37                                                  /* SMK-37: the stock firmware's (raw 602.4, 560.4, 529.6) */
+    return song.batt_raw >= 603 ? 3 : song.batt_raw >= 561 ? 2 : song.batt_raw >= 530 ? 1 : 0;
+#else
     return song.batt_raw >= 591 ? 3 : song.batt_raw >= 561 ? 2 : song.batt_raw >= 531 ? 1 : 0;
+#endif
 }
 /* charging (a USB host powers us; there is no charger status line): bars fill 1, 2, 3
  * every 0.6 s, so the header is redrawn twice a second at most; else the level */
@@ -1046,6 +1050,20 @@ UI_SMALL static void ui_timers(void)
         ui.hot_t--;
 }
 
+#if BOARD_SMK37
+static int fb_shown(void);                      /* ui_fbank.c */
+static void fb_draw(void);
+static int fb_left(void);
+static void fb_set(uint32_t b);
+static void fb_close(void);
+static void fb_expire(void);
+static int daw_screen(void);                    /* ui_daw.c: DAW mode */
+static void daw_switch(uint32_t *pressed);
+static void daw_input(uint32_t pressed, uint32_t now);
+static void daw_leds(void);
+static void daw_set(uint32_t on, int splash);
+static void daw_edit_open(void);
+#endif
 static void vis_draw(void);                     /* ui_vis.c */
 static int vis_shown(void);
 static uint8_t vis_on, vis_shown_last, vis_name_t;   /* the visualiser (ui_vis.c): on, drawn last frame, its name's time */
@@ -1053,6 +1071,13 @@ UI_SMALL static void ui_draw(void)
 {
     ui.frame++;
     pads_tick();
+#if BOARD_SMK37
+    if (daw_screen()) {                                 /* DAW mode, the mode's screen (ui_daw.c) */
+        ui_timers();
+        ui.force = 0;
+        return;
+    }
+#endif
     if (rec_go) {                                       /* the take started: say so */
         rec_go = 0;
         ui_message("RECORDING");
@@ -1075,6 +1100,22 @@ UI_SMALL static void ui_draw(void)
         if (!ui.msg_t)
             ui_message("ERASED");
     }
+#if BOARD_SMK37
+    if (fb_shown() || pick_shown()) {                  /* the FADER BANK screen (ui_fbank.c), the pad picker (ui_pick.c) */
+        if (fb_shown())
+            fb_draw();
+        else
+            pick_draw();
+        ui_timers();
+        ui.force = 0;
+        return;
+    }
+    if (fb_left() | (pick_frame && pick_frame + 1u == ui.frame)) {   /* back from them */
+        pick_frame = 0;
+        lcd_fill(0, 0, 240, 240, C_BLACK);
+        ui.force = 1;
+    }
+#endif
     if (!ui.menu && (ui.layer != LY_PLAY || ui.hold_kind)) {   /* a layer held / a hold to confirm */
         if (ui.hold_kind)
             hold_screen_draw();

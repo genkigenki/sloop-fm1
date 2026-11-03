@@ -163,6 +163,9 @@ static volatile uint8_t midi_in_lost;               /* (2.8.3) a note message di
                                                      * (a lost note-off must not leave a note stuck; after Melodee 1.5) */
 static void midi_out_event(uint32_t pkt)            /* from the audio ISR */
 {
+#if BOARD_SMK37 && !defined(FELUCCA_LOADER)      /* (the update loader: no TRS) */
+    smo_put(pkt);                                   /* SMK-37: the TRS jack too, with or without a computer */
+#endif
     if (usb.config && mo_w - mo_r < MQ) {
         midi_out_q[mo_w % MQ] = pkt;
         RING_PUBLISH();

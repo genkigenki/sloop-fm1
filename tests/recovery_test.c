@@ -20,6 +20,7 @@ static jmp_buf exit_loop;
 #define C_BLACK 0
 #define C_WHITE 65535
 #define FONT_S font
+#define BRAND_RESCUE "SLOOP USB RESCUE"   /* (felucca.c; snoop_theme.h) */
 static uint32_t fm1_ticks(void) { return ticks; }
 static void fm1_wdt_feed(void) { feeds++; }
 static void usb_poll(void) { polls++; }

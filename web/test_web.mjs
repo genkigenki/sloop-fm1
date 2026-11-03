@@ -1670,7 +1670,7 @@ class FakeFM1 {
       const body = [0, 0x59, 0x11, 0, 0, 0, ...t, ...new Array(28 - t.length).fill(0)];
       this.tx([0xF0, ...pack7(body), 0xF7]);
     } else if (eq(d, UPGRADE)) {
-      if (this.jump && !this.identity.startsWith("ota-")) { this.input.state = this.output.state = "disconnected"; setTimeout(() => this.boot(this.loader, "Felucca Update"), 300); return; }
+      if (this.jump && !this.identity.startsWith("ota-")) { this.input.state = this.output.state = "disconnected"; setTimeout(() => this.boot(this.loader, this.loaderName), 300); return; }
       const n = this.readAll ? Math.ceil(this.image.length / 512) : 6;
       this.queue = this.identity.startsWith("ota-")
         ? [...Array.from({ length: n }, (_, k) => [k * 512, Math.min(512, this.image.length - k * 512)]), [0xF0000000, 8]]
@@ -1717,13 +1717,13 @@ async function updater() {
     const win = new FakeFM1(image, { loaderName: "USB MIDI Device" });
     const ws = [];
     const g = await new Updater(win.access).install(image, "FM-1_900", (k) => ws.push(k));
-    ok(g === "FM-1_900" && win.bad === 0 && ws.at(-1) === "done" && !FM1_PORT.test("USB MIDI Device"),
+    ok(g === "FM-1_900" && win.bad === 0 && ws.at(-1) === "done" && !PORT_RE.test("USB MIDI Device"),
       "fm1ota.js: a generically-named update loader (USB MIDI Device) is still found by the handshake");
   }
   {   /* the same loader, but the device is already stuck in update mode: resume must find it too */
     const win2 = new FakeFM1(image, { loaderName: "USB MIDI Device" });
     win2.boot("ota-FM-1_900", "USB MIDI Device");
-    const done = await new Updater(win2.access).resume(image);
+    const done = await new Updater(win2.access).resume(image, null, { package: "FM-1_900" });   // (resume needs the package's identity)
     ok(done === true && win2.bad === 0, "fm1ota.js: resume finds a generically-named loader already in update mode");
   }
 

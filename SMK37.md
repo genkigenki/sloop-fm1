@@ -118,14 +118,20 @@ notes, their MIDI out and the drum levels; OCT− / OCT+ held still play ghost /
 
 ## HOME menu: the SMK-37 settings
 
-HOME menu (PATCH held; sections SCREEN, LIGHTS, AUDIO, PLAY, PEDAL, MIDI, DAW, SYSTEM); SELECT walks the sections, the knobs set the rows (K5–K8, or K1–K4 with KNOB LAYOUT = SMK;
+HOME menu (PATCH held; sections SCREEN, LIGHTS, AUDIO, USB, SEQ, PLAY, PEDAL, MIDI, DAW, SYSTEM); SELECT walks the sections, the knobs set the rows (K5–K8, or K1–K4 with KNOB LAYOUT = SMK;
 the screen names them), OCT+ steps the row under the cursor; SEQ PLAY and SEQ REC still start / stop and arm:
 
 | Section | Row | Knob | Setting |
 |---|---|---|---|
 | SCREEN | KNOB LAYOUT | K7 | FM-1 (default): K1 MASTER, K2 SELECT, K3 ALGORITHM, K4 PRESETS, K5–K8 the dials. SMK: K1–K4 the dials, K5 MASTER, K6 SELECT, K7 PRESETS, K8 ALGORITHM. The knobs are endless: the new layout works at once. Switched to SMK, the menu's rows move to K1–K4 (K3 switches back) |
 | LIGHTS | PAD LIGHT | K8 | how bright the 16 pads are: 100 % (default, as before), 75 %, 50 %, 25 %; right brighter, left dimmer, at once. The bright states follow it, the dim ones keep most of their light, so at 25 % a dim pad is still plain to see and still apart from a lit one (an empty step 40 → 25, a lit one 255 → 90 of 255) |
-| AUDIO | LIMITER | K8 | SOFT (default): 9 dB more headroom at the power-on MASTER position, the limiter only near full scale, so a held chord keeps its level; MASTER's top as loud as before (turn it up for loudness). CLASSIC: SLOOP's limiter and MASTER curve |
+| AUDIO | SPEAKER LOWCUT | K5 | SLOOP's: ON / OFF |
+| AUDIO | FILTER RESO | K6 | SLOOP 2.8's: the track filters' resonance, OFF (clean, default) to 10 |
+| AUDIO | LIMITER | K7 | SOFT (default): 9 dB more headroom at the power-on MASTER position, the limiter only near full scale, so a held chord keeps its level; MASTER's top as loud as before (turn it up for loudness). CLASSIC: SLOOP's limiter and MASTER curve |
+| USB | USB AUDIO | K5 | SLOOP's (AUDIO on the FM-1): MASTER / FULL |
+| USB | USB RATE | K6 | SLOOP's: AUTO, 44.1 KHZ, 48 KHZ (a developer build with the serial console has USB SERIAL on K6, USB RATE on K7) |
+| SEQ | STEP ADVANCE | K5 | SLOOP's: ON (default) / OFF |
+| SEQ | DRUM PREVIEW | K6 | SLOOP's: OFF (default) / ON |
 | PLAY | KEY VELOCITY | K5 | see [Velocity](#velocity) |
 | PLAY | BEND UP | K6 | the pitch wheel up, on the internal sounds (the selected synth track): OFF, 1, 2, 3, 4, 5, 7 or 12 semitones, default 7. MIDI IN's pitch bend has its own (GLO > MIDI 2 > BEND) |
 | PLAY | BEND DOWN | K7 | the same, down (default 7; e.g. +2 up, −12 down). The earlier BEND RANGE is read as both |

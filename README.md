@@ -10,18 +10,40 @@ look. The SMK-37 support is offered upstream: [#112](https://github.com/isod89/s
 <img src="docs/img/intro.webp" width="360" alt="The Snoop37 intro on the SMK-37 display">
 
 Snoop37 turns the SMK-37 MIDI keyboard into a stand-alone four-track groovebox: three synth tracks and a
-drum machine, synthesised, played and sequenced on the keyboard's own chip. It is a port of [SLOOP](https://github.com/isod89/sloop-fm1) 2.7.1 by **isod89**, the
+drum machine, synthesised, played and sequenced on the keyboard's own chip. It is a port of [SLOOP](https://github.com/isod89/sloop-fm1) 2.8.4 by **isod89**, the
 live groovebox firmware for the M-Vave FM-1, which in turn is based on
 [Felucca](https://github.com/hugelton/Felucca) by **Leo Kuroshita / Hügelton Instruments**. The FM-1 and the
 SMK-37 share the same JieLi AC791N (WL82) chip, boot chain and update loader; only the panel wiring differs.
 This branch adds the SMK-37 board support (keys, pads, faders, wheels, knobs, display, LEDs, flash map,
 installer) and the optional look (animated intro and boot jingle).
 
-> **Status: experimental. Snoop37 2.7.3, based on SLOOP 2.7.1** (0.1.x was tested on an SMK-37 Pro). Unofficial
+> **Status: experimental. Snoop37 2.8.4, based on SLOOP 2.8.4** (0.1.x was tested on an SMK-37 Pro). Unofficial
 > firmware, not affiliated with or endorsed by M-Vave. Install at your own risk and read [Safety](#safety) first.
 
 Everything SLOOP does is described in [README-SLOOP.md](README-SLOOP.md) (SLOOP's own README),
 [GUIDE.md](GUIDE.md) and [SLOOP.md](SLOOP.md).
+
+## What's new in 2.8
+
+Snoop37 2.8.4 moves to SLOOP 2.8.4 (SLOOP's own list: [README-SLOOP.md](README-SLOOP.md#whats-new-in-28)). On the
+SMK-37 that brings:
+
+- **SLOOP 2.8:** the **NOTES** piano-roll editor for the synth tracks (SEQ > NOTES), the per-step sheet (OCT+ held
+  on a step: SLIDE, NUDGE, FILL, MOVE, COPY, DELETE; RATCHET on the drums), the playing section on the TRACKS
+  screen, **FILTER RESO** (HOME menu > AUDIO), the FX filter on the drum track, drum TUNE on the noise sounds, a
+  settable punch-in fade (FX held, SELECT), steadier MIDI clock in, MIDI Bank Select (CC 0).
+- **SLOOP 2.8.1 / 2.8.3 / 2.8.4:** the step sheet as a strip along the bottom; a held note goes on under the notes
+  played over it (POLY), *MONO: SET VOICE POLY* on mono sounds; drums no longer drop the kick on a busy beat;
+  samples and chops start with their attack; a second core that misreads a job is refused (ABOUT: 1 CORE) instead
+  of a crash; clean note tails (the mix rounds properly); UNISON no longer stacks its voices in phase; PHYS strings
+  in tune; a firm press on a layer button opens its pages; on REC READY a knob changes only its own value.
+- **User samples:** the editor offers the SMK-37's two user sample slots only (USR1, USR2): the SMK-37 has no flash
+  for USR3 / USR4, where every upload failed and a backup restore stopped. A restore of an FM-1 backup now goes on
+  past them.
+- **HOME menu:** AUDIO is SPEAKER LOWCUT (K5), FILTER RESO (K6), LIMITER (K7); USB AUDIO and USB RATE moved to a
+  new **USB** section; a new **SEQ** section (STEP ADVANCE, DRUM PREVIEW) as on the FM-1.
+- SYSTEM's about screen shows `2.8.4 (SLOOP 2.8.4)`. Projects, presets, samples, kits and the SMK-37 settings of
+  2.7.x load as they are.
 
 ## What's new in 2.7
 
@@ -48,10 +70,10 @@ SMK-37 that brings:
   editor's Theme page) and the editor's LIVE page.
 - The SMK-37 settings (KEY VELOCITY, TRS MIDI OUT, BEND UP / DOWN, LIMITER, KNOB LAYOUT, BOOT LOGO, PAD LIGHT, SUSTAIN PEDAL) are kept in an
   object of their own now, since SLOOP 2.7 uses the room they had; the values of 2.6.x are taken over at the first
-  start. The HOME menu: SCREEN (COLOR, ZOOM, KNOB LAYOUT, BOOT LOGO), LIGHTS (LIGHTS, KEYS, NOTES, PAD LIGHT), AUDIO (SPEAKER LOWCUT, USB AUDIO,
-  USB RATE, LIMITER), PLAY (KEY VELOCITY, BEND UP, BEND DOWN, KNOB ACCEL), PEDAL (SUSTAIN PEDAL), MIDI, DAW, SYSTEM (2ND CORE, HARDWARE
-  CALIBRATION, MIDI LEARN CLEAR, ABOUT).
-- SYSTEM's about screen shows `2.7.3 (SLOOP 2.7.1)`. Projects, presets, samples and kits of 2.6 load as they are.
+  start. The HOME menu (2.8.4): SCREEN (COLOR, ZOOM, KNOB LAYOUT, BOOT LOGO), LIGHTS (LIGHTS, KEYS, NOTES, PAD LIGHT), AUDIO (SPEAKER LOWCUT,
+  FILTER RESO, LIMITER), USB (USB AUDIO, USB RATE), SEQ (STEP ADVANCE, DRUM PREVIEW), PLAY (KEY VELOCITY, BEND UP, BEND DOWN, KNOB ACCEL),
+  PEDAL (SUSTAIN PEDAL), MIDI, DAW, SYSTEM (2ND CORE, HARDWARE CALIBRATION, MIDI LEARN CLEAR, ABOUT).
+- SYSTEM's about screen showed `2.7.3 (SLOOP 2.7.1)`. Projects, presets, samples and kits of 2.6 load as they are.
 
 ## What's new in 2.6
 
@@ -119,7 +141,7 @@ locks, USB audio, MIDI clock, the menus and screens), mapped onto the SMK-37's c
 - **8 knobs as the FM-1's top row:** K1 master volume, K2 SELECT (tempo, pages), K3 track, K4 sound / kit,
   K5–K8 the four dials on the screen. One encoder step per detent. HOME menu > SCREEN > **KNOB LAYOUT** = SMK puts
   the dials on K1–K4, master volume on K5, SELECT on K6, sound / kit on K7, track on K8.
-- **Limiter.** HOME menu > AUDIO > **LIMITER** (K8): SOFT (default; held chords keep their level, turn MASTER up for
+- **Limiter.** HOME menu > AUDIO > **LIMITER** (K7): SOFT (default; held chords keep their level, turn MASTER up for
   loudness) or CLASSIC (SLOOP's).
 - **Buttons** keep SLOOP's functions (PATCH = HOME, PARA = EDIT, CHORD = ENV, NOTE REPEAT = LFO, SCALE = SEL,
   GLOBE = GLO, BT = SAVE, SEQ PLAY / SEQ REC = PLAY / REC); `<` and `>` walk pages, step pages (SEQ held) and

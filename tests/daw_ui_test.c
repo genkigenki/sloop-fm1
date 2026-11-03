@@ -222,8 +222,12 @@ int main(int argc, char **argv)
     shot("daw-menu-midi");
     check(MS_FIRST[MS_PLAY] == MI_VEL && MS_FIRST[MS_MIDI] == MI_TRS && MS_FIRST[MS_DAW] == MI_DMAP && MI_LOCAL - MI_TRS == 3 &&
           MI_DRESET - MI_DMAP == 3 && MI_BDN - MI_VEL == 2 && MI_ACCEL == MI_BDN + 1 && MS_FIRST[MS_PEDAL] - MS_FIRST[MS_PLAY] == 4 &&
-          MI_KLAY == MI_ZOOM + 1 && MI_LIMIT - MS_FIRST[MS_AUDIO] == 3,
-          "PLAY: KEY VELOCITY, BEND UP, BEND DOWN, KNOB ACCEL (2.7); MIDI: TRS, MODE, CHANNEL, LOCAL; DAW: 4; KNOB LAYOUT, LIMITER on their knobs");
+          MI_KLAY == MI_ZOOM + 1 && MI_LIMIT - MS_FIRST[MS_AUDIO] == 2 && MI_FRESO - MS_FIRST[MS_AUDIO] == 1 &&
+          MS_FIRST[MS_USB] == MI_USB && MS_USB == MS_AUDIO + 1 && MI_RATE > MI_USB && MS_FIRST[MS_SEQ] == MI_ADV &&
+          MS_SEQ == MS_USB + 1 && MI_DPREV == MI_ADV + 1 && MS_PLAY == MS_SEQ + 1 && !strcmp(MS_NAME[MS_USB], "USB") &&
+          !strcmp(MS_NAME[MS_SEQ], "SEQ") && !strcmp(MI_NAME[MI_FRESO], "FILTER RESO") && !strcmp(MI_NAME[MI_RATE], "USB RATE"),
+          "PLAY: KEY VELOCITY, BEND UP, BEND DOWN, KNOB ACCEL (2.7); MIDI: TRS, MODE, CHANNEL, LOCAL; DAW: 4; KNOB LAYOUT on its knob; "
+          "(2.8.4) AUDIO: LOWCUT, FILTER RESO, LIMITER; USB: USB AUDIO, USB RATE; SEQ: STEP ADVANCE, DRUM PREVIEW");
     for (i = 0; i < MS_COUNT; i++)
         if (MS_FIRST[i + 1] - MS_FIRST[i] > 4u || MS_FIRST[i + 1] <= MS_FIRST[i])
             check(0, "a section of 1..4 rows");

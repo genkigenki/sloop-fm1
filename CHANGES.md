@@ -1,5 +1,19 @@
 # Changes
 
+## Snoop37 2.8.4
+
+- **SLOOP 2.8.4** (from 2.7.1, with 2.8, 2.8.1 and 2.8.3): the NOTES editor, the per-step sheet (OCT+ held), the
+  playing section on TRACKS, FILTER RESO, the FX filter on the drums, the punch-in fade, MIDI Bank Select, held
+  notes under others, drums that keep the kick, samples with their attack, the safer second core, clean note tails,
+  UNISON apart, PHYS in tune, firm presses, REC READY's knobs; SLOOP's lists: README-SLOOP.md.
+- **User samples:** SMP_INFO reports the SMK-37's two user slots (USR1, USR2), so the editor offers no USR3 / USR4
+  (Samples, CHOP) and no USR4 / USR3+4 on its DRUM KIT page; ERASE of USR3 / USR4 answers done (always empty), so a
+  restore of an FM-1 backup goes on; BEGIN there is still refused.
+- **HOME menu:** AUDIO = SPEAKER LOWCUT, FILTER RESO, LIMITER (K5..K7); USB = USB AUDIO, USB RATE (a FELUCCA_CDC
+  build: USB SERIAL between them); SEQ = STEP ADVANCE, DRUM PREVIEW. Four rows a section, as before.
+- The LCD: 2.8's backlight helper for USB RESCUE drives PA2 on the FM-1 only (the SMK-37's backlight has no control).
+- About: `2.8.4 (SLOOP 2.8.4)`.
+
 ## Snoop37 2.7.3
 
 - **Sustain pedal** (the PEDAL jack): a footswitch on the jack holds the notes of the selected synth track

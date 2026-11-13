@@ -269,6 +269,8 @@ FADER BANK closes it (one screen at a time).
   (0xFF000–0xFFFFF)**, and leave the stock resources (0xF4000–0xFDFFF) alone: they are unique to each unit and cannot
   be recreated. The firmware and its update loader write only an explicit allow-list of flash ranges (checked at
   compile time and again in the flash driver), but a manual UBOOT write can; restore only the ranges you need.
+- The firmware writes only to a flash chip it knows (JEDEC id: 0xEB6014, 0x856014 or 0xB36014,
+  `firmware/hal/fm1_flash_id.h`); on any other chip projects stay in RAM and the update loader refuses to install.
 - `FELUCCA_UART` must stay 0 on the SMK-37 (PH8, the FM-1's MIDI IN, is a key-matrix row there): the build refuses
   otherwise. The SMK-37's TRS MIDI OUT is its own driver (`firmware/hal/smk_uart_tx.h`, `firmware/src/smk_midi_out.h`).
 - Power the keyboard from a reliable USB port during an update and do not unplug it while the update screen is up.

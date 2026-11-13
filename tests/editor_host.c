@@ -31,7 +31,7 @@ static uint8_t nor[0x100000] __attribute__((aligned(4096)));
 #define VIS_STYLES 12u
 #define VIS_LAST_NAMES "SLOOP"
 #define VIS_N_STR "/12"
-#define FL_JEDEC_OK(id) ((id) == 0x856014u)   /* as firmware/hal/fm1_flash_map.h (FM-1) */
+#include "../firmware/hal/fm1_flash_id.h"   /* FL_JEDEC_OK (FM-1) */
 static uint16_t screen[240*240];
 static void lcd_sync(void) {}
 static void lcd_blit(uint32_t x, uint32_t y, uint32_t w, uint32_t h, const uint16_t *p)

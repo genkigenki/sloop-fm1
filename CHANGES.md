@@ -1,5 +1,13 @@
 # Changes
 
+## Snoop37 2.8.5
+
+- **SLOOP 2.8.5:** the UC25HQ80 flash chip (JEDEC 0xB36014, FM-1 units sold from late 2026) is known to the storage,
+  USB RESCUE and the update loader. On the SMK-37 the accepted parts are 0xEB6014 (SMK-37 Pro), 0x856014 (Puya,
+  SMK-37 Elite) and now 0xB36014, all in one place (firmware/hal/fm1_flash_id.h); any other chip stays RAM-only and
+  the loader refuses, as before.
+- About: `2.8.5 (SLOOP 2.8.5)`.
+
 ## Snoop37 2.8.4
 
 - **SLOOP 2.8.4** (from 2.7.1, with 2.8, 2.8.1 and 2.8.3): the NOTES editor, the per-step sheet (OCT+ held), the

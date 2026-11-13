@@ -10,14 +10,14 @@ look. The SMK-37 support is offered upstream: [#112](https://github.com/isod89/s
 <img src="docs/img/intro.webp" width="360" alt="The Snoop37 intro on the SMK-37 display">
 
 Snoop37 turns the SMK-37 MIDI keyboard into a stand-alone four-track groovebox: three synth tracks and a
-drum machine, synthesised, played and sequenced on the keyboard's own chip. It is a port of [SLOOP](https://github.com/isod89/sloop-fm1) 2.8.4 by **isod89**, the
+drum machine, synthesised, played and sequenced on the keyboard's own chip. It is a port of [SLOOP](https://github.com/isod89/sloop-fm1) 2.8.5 by **isod89**, the
 live groovebox firmware for the M-Vave FM-1, which in turn is based on
 [Felucca](https://github.com/hugelton/Felucca) by **Leo Kuroshita / Hügelton Instruments**. The FM-1 and the
 SMK-37 share the same JieLi AC791N (WL82) chip, boot chain and update loader; only the panel wiring differs.
 This branch adds the SMK-37 board support (keys, pads, faders, wheels, knobs, display, LEDs, flash map,
 installer) and the optional look (animated intro and boot jingle).
 
-> **Status: experimental. Snoop37 2.8.4, based on SLOOP 2.8.4** (0.1.x was tested on an SMK-37 Pro). Unofficial
+> **Status: experimental. Snoop37 2.8.5, based on SLOOP 2.8.5** (0.1.x was tested on an SMK-37 Pro). Unofficial
 > firmware, not affiliated with or endorsed by M-Vave. Install at your own risk and read [Safety](#safety) first.
 
 Everything SLOOP does is described in [README-SLOOP.md](README-SLOOP.md) (SLOOP's own README),
@@ -25,7 +25,7 @@ Everything SLOOP does is described in [README-SLOOP.md](README-SLOOP.md) (SLOOP'
 
 ## What's new in 2.8
 
-Snoop37 2.8.4 moves to SLOOP 2.8.4 (SLOOP's own list: [README-SLOOP.md](README-SLOOP.md#whats-new-in-28)). On the
+Snoop37 2.8.5 is on SLOOP 2.8.5 (SLOOP's own list: [README-SLOOP.md](README-SLOOP.md#whats-new-in-28)). On the
 SMK-37 that brings:
 
 - **SLOOP 2.8:** the **NOTES** piano-roll editor for the synth tracks (SEQ > NOTES), the per-step sheet (OCT+ held
@@ -37,12 +37,15 @@ SMK-37 that brings:
   samples and chops start with their attack; a second core that misreads a job is refused (ABOUT: 1 CORE) instead
   of a crash; clean note tails (the mix rounds properly); UNISON no longer stacks its voices in phase; PHYS strings
   in tune; a firm press on a layer button opens its pages; on REC READY a knob changes only its own value.
+- **SLOOP 2.8.5:** the update loader, the storage and USB RESCUE also know the UC25HQ80 flash chip (JEDEC 0xB36014,
+  in FM-1 units sold from late 2026), besides the SMK-37 Pro's 0xEB6014 and the Elite's Puya 0x856014: an SMK-37
+  with that chip saves and updates instead of keeping projects in RAM.
 - **User samples:** the editor offers the SMK-37's two user sample slots only (USR1, USR2): the SMK-37 has no flash
   for USR3 / USR4, where every upload failed and a backup restore stopped. A restore of an FM-1 backup now goes on
   past them.
 - **HOME menu:** AUDIO is SPEAKER LOWCUT (K5), FILTER RESO (K6), LIMITER (K7); USB AUDIO and USB RATE moved to a
   new **USB** section; a new **SEQ** section (STEP ADVANCE, DRUM PREVIEW) as on the FM-1.
-- SYSTEM's about screen shows `2.8.4 (SLOOP 2.8.4)`. Projects, presets, samples, kits and the SMK-37 settings of
+- SYSTEM's about screen shows `2.8.5 (SLOOP 2.8.5)`. Projects, presets, samples, kits and the SMK-37 settings of
   2.7.x load as they are.
 
 ## What's new in 2.7
